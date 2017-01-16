@@ -1,33 +1,20 @@
 const {shell} = require('electron')
 const app = require('electron').remote.app;
-const updater = require('electron').remote.require('electron-auto-updater');
+const autoUpdater = require('electron').remote.require('electron-auto-updater').autoUpdater;
 
-console.log("current versiones: " + app.getVersion());
-console.log(app);
+autoUpdater.checkForUpdates();
 
-updater.autoUpdater.checkForUpdates();
-updater.autoUpdater.addListener("update-available", function (event) {
+autoUpdater.addListener("update-available", function (event) {
     console.log("A new update is available");
 });
-
-updater.autoUpdater.addListener("update-not-available", function () {
-    console.log("update-not-available");
-});
-
-updater.autoUpdater.addListener("update-downloaded", (event, releaseNotes, releaseName, releaseDate, updateURL) => {
+autoUpdater.addListener("update-downloaded", (event, releaseNotes, releaseName, releaseDate, updateURL) => {
     console.log("A new update is ready to install", `Version ${releaseName} is downloaded and will be automatically installed on Quit`);
-    console.log("quitAndInstall");
-    updater.autoUpdater.quitAndInstall();
+    autoUpdater.quitAndInstall();
     return true;
 })
-updater.autoUpdater.addListener("error", (error) => {
+autoUpdater.addListener("error", (error) => {
     console.log(error);
 });
-updater.autoUpdater.addListener("checking-for-update", (event) => {
-    console.log("checking-for-update");
-});
-
-
 
 var webview = document.getElementById("docnet");
 webview.style.height = window.innerHeight + "px";
