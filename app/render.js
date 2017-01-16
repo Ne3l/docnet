@@ -1,12 +1,12 @@
 const {shell} = require('electron')
-const app = require('electron').remote.app;
 const autoUpdater = require('electron').remote.require('electron-auto-updater').autoUpdater;
-
-autoUpdater.checkForUpdates();
 
 autoUpdater.addListener("update-available", function (event) {
     console.log("A new update is available");
-    document.getElementsByTagName("body").innerHTML = '<div class="ms-spinner"><div class="ms-spinner-circle">Actualizando aplicación</div></div>';
+    var element = document.getElementById("docnet");
+    element.outerHTML = "";
+    delete element;
+    paintSpinner("Descargando Actualizacion");
 });
 autoUpdater.addListener("update-downloaded", (event, releaseNotes, releaseName, releaseDate, updateURL) => {
     console.log("A new update is ready to install", `Version ${releaseName} is downloaded and will be automatically installed on Quit`);
@@ -16,21 +16,31 @@ autoUpdater.addListener("update-downloaded", (event, releaseNotes, releaseName, 
 autoUpdater.addListener("error", (error) => {
     console.log(error);
 });
+autoUpdater.checkForUpdates();
 
-var webview = document.getElementById("docnet");
+const webview = document.getElementById("docnet");
+const loading = document.getElementById('loading')
+   
 webview.style.height = window.innerHeight + "px";
 window.onresize = function (event) {
     webview.style.height = window.innerHeight + "px";
 };
+
+function paintSpinner(label){
+    let spinner = '<div class="ms-spinner">';
+            spinner += '<div class="ms-spinner-circle"></div>';
+            spinner += '<div class="ms-spinner-label">';
+            spinner += '<span>' + label + '</span>';
+            spinner += '</div>';
+            spinner += '</div>';
+            loading.innerHTML = spinner;
+}
+
 onload = () => {
-    const loading = document.getElementById('loading')
     var showSpinner = true;
     const loadstart = () => {
         if (showSpinner) {
-            let spinner = '<div class="ms-spinner">';
-            spinner += '<div class="ms-spinner-circle"/>';
-            spinner += '</div>';
-            loading.innerHTML = spinner;
+           paintSpinner("Cargando"); 
         }
     }
     const loadstop = () => {
