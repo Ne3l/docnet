@@ -6,7 +6,7 @@ autoUpdater.addListener("update-available", function (event) {
     var element = document.getElementById("docnet");
     element.outerHTML = "";
     delete element;
-    paintSpinner("Descargando Actualizacion");
+    paintSpinner("Descargando Actualización");
 });
 autoUpdater.addListener("update-downloaded", (event, releaseNotes, releaseName, releaseDate, updateURL) => {
     console.log("A new update is ready to install", `Version ${releaseName} is downloaded and will be automatically installed on Quit`);
