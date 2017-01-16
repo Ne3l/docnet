@@ -1,11 +1,12 @@
 {
   "name": "docnet",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Programa gestion talleres",
   "repository": "https://github.com/Ne3l/docnet",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "release": "build"
   },
   "author": "Skrit S.L",
   "devDependencies": {
