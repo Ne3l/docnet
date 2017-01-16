@@ -28,12 +28,12 @@ window.onresize = function (event) {
 
 function paintSpinner(label){
     let spinner = '<div class="ms-spinner">';
-            spinner += '<div class="ms-spinner-circle"></div>';
-            spinner += '<div class="ms-spinner-label">';
-            spinner += '<span>' + label + '</span>';
-            spinner += '</div>';
-            spinner += '</div>';
-            loading.innerHTML = spinner;
+    spinner += '<div class="ms-spinner-circle"></div>';
+    spinner += '<div class="ms-spinner-label">';
+    spinner += '<span>' + label + '</span>';
+    spinner += '</div>';
+    spinner += '</div>';
+    loading.innerHTML = spinner;
 }
 
 onload = () => {
