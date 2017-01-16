@@ -6,7 +6,7 @@ autoUpdater.checkForUpdates();
 
 autoUpdater.addListener("update-available", function (event) {
     console.log("A new update is available");
-    document.getElementsByTagName("body").innerHTML = '<div id="loading"></div>';
+    document.getElementsByTagName("body").innerHTML = '<div class="ms-spinner"><div class="ms-spinner-circle">Actualizando aplicación</div></div>';
 });
 autoUpdater.addListener("update-downloaded", (event, releaseNotes, releaseName, releaseDate, updateURL) => {
     console.log("A new update is ready to install", `Version ${releaseName} is downloaded and will be automatically installed on Quit`);
