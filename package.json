@@ -13,7 +13,7 @@
     "appId": "skrit.docnet",
     "productName": "Docnet",
     "win": {
-      "iconUrl" : "https://github.com/Ne3l/docnet/blob/master/build/installerIcon.ico"
+      "iconUrl" : "https://icons.iconseeker.com/ico/crystal-clear-actions/software-3.ico"
     }
   },
   "scripts": {
