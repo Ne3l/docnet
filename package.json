@@ -12,9 +12,6 @@
   "build": {
     "appId": "skrit.docnet",
     "productName": "Docnet",
-    "win": {
-      "iconUrl" : "https://icons.iconseeker.com/ico/crystal-clear-actions/software-3.ico"
-    }
   },
   "scripts": {
     "pack": "build --dir",
