@@ -11,7 +11,7 @@
   },
   "build": {
     "appId": "skrit.docnet",
-    "productName": "Docnet",
+    "productName": "Docnet"
   },
   "scripts": {
     "pack": "build --dir",
