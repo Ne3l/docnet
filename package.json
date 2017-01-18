@@ -11,7 +11,10 @@
   },
   "build": {
     "appId": "skrit.docnet",
-    "productName": "Docnet"
+    "productName": "Docnet",
+    "win": {
+      "icon" : "build/ico.ico"
+    }
   },
   "scripts": {
     "pack": "build --dir",
