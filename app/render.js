@@ -1,6 +1,5 @@
 const {shell} = require('electron')
 const autoUpdater = require('electron').remote.require('electron-auto-updater').autoUpdater;
-
 autoUpdater.addListener("update-available", function (event) {
     console.log("A new update is available");
     var element = document.getElementById("docnet");
@@ -19,7 +18,7 @@ autoUpdater.addListener("error", (error) => {
 autoUpdater.checkForUpdates();
 
 const webview = document.getElementById("docnet");
-const loading = document.getElementById('loading')
+const loading = document.getElementById('loading');
    
 webview.style.height = window.innerHeight + "px";
 window.onresize = function (event) {
@@ -36,6 +35,22 @@ function paintSpinner(label){
     loading.innerHTML = spinner;
 }
 
+function login(){
+    var functionClick = "function(e){"
+    functionClick+= " if($('#recordarCredentials').prop('checked')){";
+    functionClick+= "localStorage.setItem('user',$('#inputUsuario').val());";
+    functionClick+= "localStorage.setItem('password',$('#inputPassword').val());";
+    functionClick+= "}}";
+    
+    var mainFunction = "if($('body').hasClass('login')){";
+    mainFunction += "$('#frmLogin').append('<input type=\"checkbox\" id=\"recordarCredentials\" checked/> <span style=\"color:#fff;\"> Recordar usuario y contraseña</span>');";
+    mainFunction += "$('#inputUsuario').val(localStorage.getItem('user'));";
+    mainFunction += "$('#inputPassword').val(localStorage.getItem('password'));";
+    mainFunction += "$('#btnAceptar').on('click'," + functionClick + ")";
+    mainFunction += "}";
+    webview.executeJavaScript(mainFunction);
+}
+
 onload = () => {
     var showSpinner = true;
     const loadstart = () => {
@@ -49,6 +64,7 @@ onload = () => {
             loading.innerHTML = '';
         }
         webview.insertCSS('::-webkit-scrollbar {background-color: #eee ;width: 0.8em} ::-webkit-scrollbar-thumb:window-inactive, ::-webkit-scrollbar-thumb {background: #48525e ;}');
+        login();
     }
     webview.addEventListener('did-start-loading', loadstart)
     webview.addEventListener('did-stop-loading', loadstop)

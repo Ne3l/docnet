@@ -8,7 +8,7 @@ const url = require('url')
 let mainWindow
 
 function createWindow () {
-  mainWindow = new BrowserWindow({width: 800, height: 600, title:'Docnet', backgroundColor: '#2c363f'})
+  mainWindow = new BrowserWindow({width: 800, height: 600, title:'Docnet', backgroundColor: '#2c363f',show: false})
   mainWindow.maximize();
   mainWindow.setMenu(null)
 
@@ -17,6 +17,10 @@ function createWindow () {
     protocol: 'file:',
     slashes: true
   }))
+
+  mainWindow.once('ready-to-show', function () {
+    mainWindow.show()
+  })
 
   mainWindow.on('closed', function () {
     mainWindow = null
