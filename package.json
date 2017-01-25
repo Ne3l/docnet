@@ -1,13 +1,13 @@
 {
   "name": "docnet",
-  "version": "1.1.12",
+  "version": "1.1.13",
   "description": "Programa gestion talleres",
   "author": "Skrit S.L",
   "main": "main.js",
   "repository": "https://github.com/Ne3l/docnet",
   "devDependencies": {
     "electron": "^1.4.15",
-    "electron-builder": "^11.4.1"
+    "electron-builder": "^11.5.1"
   },
   "build": {
     "appId": "skrit.docnet",
@@ -16,6 +16,6 @@
   "scripts": {
     "pack": "build --dir",
     "dist": "build",
-    "release": "build"
+    "release": "build --ia32 --x64"
   }
 }
