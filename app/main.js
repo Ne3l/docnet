@@ -1,8 +1,6 @@
-const electron = require('electron')
-// Module to control application life.
-const app = electron.app
-// Module to create native browser window.
-const BrowserWindow = electron.BrowserWindow
+const electron = require('electron');
+const app = electron.app;
+const BrowserWindow = electron.BrowserWindow;
 const path = require('path')
 const url = require('url')
 let mainWindow
@@ -17,7 +15,7 @@ function createWindow () {
     protocol: 'file:',
     slashes: true
   }))
-
+  
   mainWindow.once('ready-to-show', function () {
     mainWindow.show()
   })
