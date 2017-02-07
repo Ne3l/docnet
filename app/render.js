@@ -1,5 +1,7 @@
 const {shell} = require('electron')
 const autoUpdater = require('electron').remote.require('electron-auto-updater').autoUpdater;
+const remote = require('electron').remote; 
+const Menu = remote.Menu;
 autoUpdater.addListener("update-available", function (event) {
     console.log("A new update is available");
     var element = document.getElementById("docnet");
@@ -72,4 +74,21 @@ onload = () => {
 
 webview.addEventListener('new-window', function (event) {
     shell.openExternal(event.url);
+});
+
+webview.addEventListener('context-menu', (e, props) => {
+    const menu = Menu.buildFromTemplate([, {
+        label: 'Copiar',
+        role: 'copy',
+    }, {
+        label: 'Pegar',
+        role: 'paste',
+    }, {
+        type: 'separator',
+    }, {
+        label: 'Seleccionar Todo',
+        role: 'selectall',
+    },
+    ]);
+    menu.popup(remote.getCurrentWindow());
 });
