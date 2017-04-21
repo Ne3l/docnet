@@ -1,5 +1,20 @@
-const { shell, remote, ipcRenderer } = require('electron');
+const { shell } = require('electron');
+const autoUpdater = require('electron').remote.require('electron-auto-updater').autoUpdater;
+const remote = require('electron').remote;
 const Menu = remote.Menu;
+autoUpdater.addListener('update-available', function(event) {
+    var element = document.getElementById('docnet');
+    element.outerHTML = '';
+    paintSpinner('Descargando Actualización');
+});
+autoUpdater.addListener('update-downloaded', (event, releaseNotes, releaseName, releaseDate, updateURL) => {
+    autoUpdater.quitAndInstall();
+    return true;
+});
+autoUpdater.addListener('error', error => {
+    console.log(error);
+});
+autoUpdater.checkForUpdates();
 
 const webview = document.getElementById('docnet');
 const loading = document.getElementById('loading');
@@ -18,12 +33,6 @@ function paintSpinner(label) {
     spinner += '</div>';
     loading.innerHTML = spinner;
 }
-
-ipcRenderer.on('update-available', function() {
-    var element = document.getElementById('docnet');
-    element.outerHTML = '';
-    paintSpinner('Descargando Actualización');
-});
 
 function login() {
     var functionClick = 'function(e){';
@@ -61,8 +70,6 @@ onload = () => {
     };
     webview.addEventListener('did-start-loading', loadstart);
     webview.addEventListener('did-stop-loading', loadstop);
-
-    ipcRenderer.send('did-finish-load');
 };
 
 webview.addEventListener('new-window', function(event) {

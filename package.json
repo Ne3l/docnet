@@ -7,10 +7,7 @@
   "repository": "https://github.com/Ne3l/docnet",
   "devDependencies": {
     "electron": "1.6.5",
-    "electron-builder": "^17.0.1"
-  },
-  "dependencies": {
-    "electron-updater": "^1.14.0"
+    "electron-builder": "17.0.1"
   },
   "build": {
     "appId": "skrit.docnet",
