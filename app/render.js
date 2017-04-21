@@ -1,5 +1,5 @@
 const { shell } = require('electron');
-const autoUpdater = require('electron').remote.require('electron-updater').autoUpdater;
+const autoUpdater = require('electron-updater').autoUpdater;
 const remote = require('electron').remote;
 const Menu = remote.Menu;
 autoUpdater.addListener('update-available', function(event) {
