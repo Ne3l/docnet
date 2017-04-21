@@ -1,6 +1,6 @@
 const electron = require('electron');
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
+var { app, BrowserWindow, ipcMain } = electron;
+const autoUpdater = require('electron-updater').autoUpdater;
 const path = require('path');
 const url = require('url');
 let mainWindow;
@@ -34,6 +34,21 @@ function createWindow() {
         mainWindow = null;
     });
 }
+
+ipcMain.on('did-finish-load', function() {
+    autoUpdater.checkForUpdates();
+});
+
+autoUpdater.addListener('update-available', function(event) {
+    mainWindow.webContents.send('update-available');
+});
+autoUpdater.addListener('update-downloaded', (event, releaseNotes, releaseName, releaseDate, updateURL) => {
+    autoUpdater.quitAndInstall();
+    return true;
+});
+autoUpdater.addListener('error', error => {
+    console.log(error);
+});
 
 app.on('ready', createWindow);
 app.on('window-all-closed', function() {
