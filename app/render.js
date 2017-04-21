@@ -3,16 +3,11 @@ const autoUpdater = require('electron').remote.require('electron-updater').autoU
 const remote = require('electron').remote;
 const Menu = remote.Menu;
 autoUpdater.addListener('update-available', function(event) {
-    console.log('A new update is available');
     var element = document.getElementById('docnet');
     element.outerHTML = '';
     paintSpinner('Descargando Actualización');
 });
 autoUpdater.addListener('update-downloaded', (event, releaseNotes, releaseName, releaseDate, updateURL) => {
-    console.log(
-        'A new update is ready to install',
-        `Version ${releaseName} is downloaded and will be automatically installed on Quit`
-    );
     autoUpdater.quitAndInstall();
     return true;
 });
