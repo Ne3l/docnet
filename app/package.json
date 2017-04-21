@@ -10,9 +10,9 @@
   },
   "author": "Skrit S.L",
   "devDependencies": {
-    "electron": "^1.6.3"
+    "electron": "^1.6.5"
   },
   "dependencies": {
-    "electron-auto-updater": "^1.0.0"
+    "electron-updater": "^1.14.0"
   }
 }

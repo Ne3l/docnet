@@ -5,10 +5,34 @@
     <meta charset="UTF-8">
     <title>Docnet</title>
     <style type="text/css">
-        html,body{margin:0;padding:0;}
-        webview{display:flex;width: 100%;}
-        .ms-spinner { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #3a4554; }
-        .ms-spinner-label { position: relative; top: 38%; margin-top: 10px; text-align: center; color: #9aa3af; }
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        webview {
+            display: flex;
+            width: 100%;
+        }
+        
+        .ms-spinner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #3a4554;
+        }
+        
+        .ms-spinner-label {
+            position: relative;
+            top: 38%;
+            margin-top: 10px;
+            text-align: center;
+            color: #9aa3af;
+        }
+        
         .ms-spinner-circle {
             position: relative;
             top: 38%;
@@ -21,17 +45,25 @@
             border-top-color: #0078d7;
             animation: ms-spinner-spin 1.3s infinite cubic-bezier(.53, .21, .29, .67);
         }
+        
         @keyframes ms-spinner-spin {
-            0% { transform: rotate(0) }
-            100% { transform: rotate(360deg) }
+            0% {
+                transform: rotate(0)
+            }
+            100% {
+                transform: rotate(360deg)
+            }
         }
     </style>
 </head>
+
 <body>
     <div id="loading"></div>
-    <webview id="docnet" src="http://comerciales.docnet.es/Login.aspx"></webview>
+    <webview id="docnet" src="http://comerciales.docnet.es/login.aspx"></webview>
 </body>
 <script>
     require('./render.js')
+
 </script>
+
 </html>
