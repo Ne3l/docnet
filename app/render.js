@@ -1,7 +1,7 @@
-const { shell } = require('electron');
-const autoUpdater = require('electron').remote.require('electron-auto-updater').autoUpdater;
-const remote = require('electron').remote;
-const Menu = remote.Menu;
+const { shell, remote } = require('electron');
+const autoUpdater = remote.require('electron-auto-updater').autoUpdater;
+const { Menu } = remote;
+
 autoUpdater.addListener('update-available', function(event) {
     var element = document.getElementById('docnet');
     element.outerHTML = '';
@@ -12,7 +12,7 @@ autoUpdater.addListener('update-downloaded', (event, releaseNotes, releaseName, 
     return true;
 });
 autoUpdater.addListener('error', error => {
-    console.log(error);
+    //console.log(error);
 });
 autoUpdater.checkForUpdates();
 
@@ -25,29 +25,27 @@ window.onresize = function(event) {
 };
 
 function paintSpinner(label) {
-    let spinner = '<div class="ms-spinner">';
-    spinner += '<div class="ms-spinner-circle"></div>';
-    spinner += '<div class="ms-spinner-label">';
-    spinner += '<span>' + label + '</span>';
-    spinner += '</div>';
-    spinner += '</div>';
+    let spinner = `<div class="ms-spinner">
+        <div class="ms-spinner-circle"></div>
+        <div class="ms-spinner-label">
+            <span>${label}</span>
+        </div>
+    </div>`;
     loading.innerHTML = spinner;
 }
 
 function login() {
-    var functionClick = 'function(e){';
-    functionClick += " if($('#recordarCredentials').prop('checked')){";
-    functionClick += "localStorage.setItem('user',$('#inputUsuario').val());";
-    functionClick += "localStorage.setItem('password',$('#inputPassword').val());";
-    functionClick += '}}';
+    var functionClick = function(e) {
+        if ($('#recordarCredentials').prop('checked')) {
+            localStorage.setItem('user', $('#inputUsuario').val());
+            localStorage.setItem('password', $('#inputPassword').val());
+        }
+    };
 
-    var mainFunction = "if($('body').hasClass('login')){";
-    mainFunction +=
-        '$(\'#frmLogin\').append(\'<input type="checkbox" id="recordarCredentials" checked/> <span style="color:#fff;"> Recordar usuario y contraseña</span>\');';
-    mainFunction += "$('#inputUsuario').val(localStorage.getItem('user'));";
-    mainFunction += "$('#inputPassword').val(localStorage.getItem('password'));";
-    mainFunction += "$('#btnAceptar').on('click'," + functionClick + ')';
-    mainFunction += '}';
+    var mainFunction = `$('#frmLogin').append('<input type="checkbox" id="recordarCredentials" checked/> <span style="color:#fff;"> Recordar usuario y contraseña</span>');
+    $('#inputUsuario').val(localStorage.getItem('user'));
+    $('#inputPassword').val(localStorage.getItem('password'));
+    $('#btnAceptar').on('click',${functionClick.toString()});`;
     webview.executeJavaScript(mainFunction);
 }
 
@@ -66,7 +64,9 @@ onload = () => {
         webview.insertCSS(
             '::-webkit-scrollbar {background-color: #eee ;width: 0.8em} ::-webkit-scrollbar-thumb:window-inactive, ::-webkit-scrollbar-thumb {background: #48525e ;}'
         );
-        login();
+        if (webview.src.indexOf('login.aspx') !== 1) {
+            login();
+        }
     };
     webview.addEventListener('did-start-loading', loadstart);
     webview.addEventListener('did-stop-loading', loadstop);
