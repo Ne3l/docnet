@@ -1,6 +1,6 @@
 {
     "name": "docnet",
-    "version": "1.1.18",
+    "version": "1.1.21",
     "description": "Programa gestion talleres",
     "repository": "https://github.com/Ne3l/docnet",
     "main": "main.js",
