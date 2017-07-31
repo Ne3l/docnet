@@ -1,5 +1,6 @@
 const electron = require('electron');
 const { app, BrowserWindow, ipcMain, dialog } = electron;
+const { autoUpdater } = require('electron-updater');
 const path = require('path');
 const url = require('url');
 const fs = require('fs');
@@ -24,6 +25,8 @@ function createWindow() {
         })
     );
 
+    mainWindow.webContents.openDevTools();
+
     mainWindow.once('ready-to-show', function() {
         mainWindow.show();
     });
@@ -44,6 +47,19 @@ app.on('activate', function() {
     if (mainWindow === null) {
         createWindow();
     }
+});
+
+autoUpdater.addListener('update-available', function(event) {
+    win.webContents.send('update-available');
+});
+
+autoUpdater.addListener('update-downloaded', (event, releaseNotes, releaseName, releaseDate, updateURL) => {
+    autoUpdater.quitAndInstall();
+    return true;
+});
+
+app.on('ready', function() {
+    autoUpdater.checkForUpdates();
 });
 
 ipcMain.on('print-to-pdf', (e, args) => {
