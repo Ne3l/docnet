@@ -25,8 +25,6 @@ function createWindow() {
         })
     );
 
-    mainWindow.webContents.openDevTools();
-
     mainWindow.once('ready-to-show', function() {
         mainWindow.show();
     });
