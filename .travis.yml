@@ -1,8 +1,9 @@
+dist: trusty
 os:
   - linux
 
 language: node_js
-sudo: false
+sudo: required
 node_js: node
 
 script:
