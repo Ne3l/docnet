@@ -6,7 +6,7 @@
     "main": "main.js",
     "repository": "https://github.com/Ne3l/docnet",
     "devDependencies": {
-        "electron": "1.7.5",
+        "electron": "1.8.8",
         "electron-builder": "19.5.1"
     },
     "optionalDependencies": {
